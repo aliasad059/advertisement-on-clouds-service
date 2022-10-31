@@ -1,9 +1,3 @@
-# DOMAIN = "sandbox793a7ecb15d54627bab7e26bde95c9ac.mailgun.org"
-# API_KEY = "c5c1aeceada6e89fc4780c8997b7a88b3-8845d1b1-a96a9215"
-# EMAIL_ADDRESS = "aliasad059@gmail.com"
-# TEXT = "Your ad has been accepted!"
-# SUBJECT = "Cloud Computing HW1"
-
 import requests
 
 class EmailDeliveryAPI():
