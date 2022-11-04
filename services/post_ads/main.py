@@ -1,18 +1,15 @@
-import os
-
 import uvicorn
-from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, UploadFile
 from prometheus_fastapi_instrumentator import Instrumentator
 from uvicorn.config import LOGGING_CONFIG
 
-from post_ads_service import PostAdService
+from config import UVICORN_HOST, UVICORN_PORT, psql_config, s3_config, rabbitmq_config
+from post_ads_service import PostAdsService
 
-load_dotenv()
 app = FastAPI()
 Instrumentator().instrument(app).expose(app)
 
-post_ads_service = PostAdsService()
+post_ads_service = PostAdsService(psql_config, s3_config, rabbitmq_config)
 
 
 @app.post("/post_new_ad")
@@ -35,7 +32,7 @@ async def get_request_status(
 
 def run():
     LOGGING_CONFIG["formatters"]["default"]["fmt"] = "%(asctime)s [%(name)s] %(levelprefix)s %(message)s"
-    uvicorn.run(app, host=os.getenv('UVICORN_HOST'), port=os.getenv('UVICORN_PORT'))
+    uvicorn.run(app, host=UVICORN_HOST, port=UVICORN_PORT)
 
 
 if __name__ == '__main__':
