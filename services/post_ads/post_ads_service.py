@@ -1,8 +1,8 @@
-class PostAdvsService:
+class PostAdsService:
     def __init__(self)->None:
         pass
     
-    def post_advs(self, image, description, email):
+    def post_ads(self, image, description, email):
         # save description and email to db
         # save image to s3 bucket
         # send message to queue

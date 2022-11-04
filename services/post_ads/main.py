@@ -6,22 +6,22 @@ from fastapi import FastAPI, File, Form, UploadFile
 from prometheus_fastapi_instrumentator import Instrumentator
 from uvicorn.config import LOGGING_CONFIG
 
-from post_advs_service import PostAdvsService
+from post_ads_service import PostAdService
 
 load_dotenv()
 app = FastAPI()
 Instrumentator().instrument(app).expose(app)
 
-post_advs_service = PostAdvsService()
+post_ads_service = PostAdsService()
 
 
-@app.post("/post_advs")
-async def post_advs(
+@app.post("/post_new_ad")
+async def post_new_ad(
     image : UploadFile = File(...),
     description : str = Form(...),
     email : str = Form(...)
 ):
-    request_id = post_advs_service.post_advs(image, description, email)
+    request_id = post_ads_service.post_ads(image, description, email)
     # TODO: send email to user
     return {"request_id": request_id}
 
@@ -30,7 +30,7 @@ async def post_advs(
 async def get_request_status(
     request_id : str = Form(...)
 ):  
-    request_status = post_advs_service.get_request_status(request_id)
+    request_status = post_ads_service.get_request_status(request_id)
     return {"request_status": request_status}
 
 def run():
