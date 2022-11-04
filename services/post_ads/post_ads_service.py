@@ -20,9 +20,24 @@ class PostAdsService:
         # send message to queue
         self.rabbitmq_client.send_message(request_id)
 
-        return request_id
+        return {"request_id": request_id}
 
     def get_request_status(self, post_id):
         # get request status from db
-        request_status = self.psql_client.select_from_table("ads", "state", f"id = {post_id}")
-        return request_status
+        request_status = self.psql_client.select_from_table("ads", "*", f"id = {post_id}")
+        if request_status:
+            if request_status[0][3] == "approved":
+                # TODO: send image link to user
+                return {
+                    "request_id":request_status[0][0],
+                    "status": request_status[0][3],
+                    "category":request_status[0][4],
+                    "description":request_status[0][1],
+                 }
+            else:
+                return {
+                    "request_id":request_status[0][0],
+                    "status": request_status[0][3],
+                    "description":request_status[0][1],
+                 }
+        return 'not found'

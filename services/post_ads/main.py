@@ -1,3 +1,4 @@
+from urllib import response
 import uvicorn
 from fastapi import FastAPI, File, Form, UploadFile
 from prometheus_fastapi_instrumentator import Instrumentator
@@ -18,9 +19,9 @@ async def post_new_ad(
     description : str = Form(...),
     email : str = Form(...)
 ):
-    request_id = post_ads_service.post_ads(image, description, email)
+    response = post_ads_service.post_ads(image, description, email)
     # TODO: send email to user
-    return {"request_id": request_id}
+    return response
 
 
 @app.post("/get_request_status")
@@ -28,7 +29,7 @@ async def get_request_status(
     request_id : str = Form(...)
 ):  
     request_status = post_ads_service.get_request_status(request_id)
-    return {"request_status": request_status}
+    return request_status
 
 def run():
     LOGGING_CONFIG["formatters"]["default"]["fmt"] = "%(asctime)s [%(name)s] %(levelprefix)s %(message)s"
