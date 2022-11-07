@@ -14,22 +14,21 @@ class S3Connector():
         self.bucket = self.s3.Bucket(bucket_name).create()
         print("Connected to the S3 server successfully")
         
-    def upload_file(self, file_path, object_name):
+    def upload_file(self, image_file, object_name):
         """
             Uploads a file to the bucket
         """
         try:
             bucket = self.bucket
-            with open(file_path, "rb") as file:
-                bucket.put_object(
-                    ACL='private',
-                    Body=file,
-                    Key=object_name
-                )
+            response = bucket.put_object(
+                Key=object_name,
+                Body=image_file,
+                ACL='private'
+            )
         except ClientError as e:
             print(e)
-            return False
-        return True
+            return None
+        return response
         
     def get_file_url(self, object_name):
         """

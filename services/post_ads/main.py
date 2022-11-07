@@ -1,4 +1,3 @@
-from urllib import response
 import uvicorn
 from fastapi import FastAPI, File, Form, UploadFile
 from prometheus_fastapi_instrumentator import Instrumentator

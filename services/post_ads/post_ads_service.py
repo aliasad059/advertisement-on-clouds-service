@@ -14,7 +14,7 @@ class PostAdsService:
         request_id =  self.psql_client.insert_into_table("ads", description, email)
 
         # save image to s3 bucket
-        s3_respose = self.s3_client.upload_file(image, request_id)
+        s3_respose = self.s3_client.upload_file(image.file, request_id)
         print(s3_respose)
 
         # send message to queue
