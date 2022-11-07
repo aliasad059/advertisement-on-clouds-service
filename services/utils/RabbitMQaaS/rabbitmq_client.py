@@ -14,6 +14,7 @@ class RabbitMQConnector():
     def receive_message(self):
         def callback(ch, method, properties, body):
             print(" [x] Received %r" % body)
+            #TODO: send request to process ads service
         self.channel.basic_consume(queue='ads', on_message_callback=callback, auto_ack=True)
         print(' [*] Waiting for messages. To exit press CTRL+C')
         self.channel.start_consuming()
