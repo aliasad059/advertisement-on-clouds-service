@@ -1,6 +1,6 @@
 from utils.DBaaS.psql_client import PSQLConnector
 from utils.DBaaS.s3_client import S3Connector
-from utils.RabbitMQaaS.rabbitmq_client import RabbitMQConnector
+from utils.RabbitMQaaS.rabbitmq_receiver import RabbitMQReceiver
 from utils.API.image_tagging_api import ImageTaggingAPI
 
 class ProcessAdsService:
@@ -8,7 +8,7 @@ class ProcessAdsService:
         self.psql_client = PSQLConnector(**psql_config)
         self.s3_client = S3Connector(**s3_config)
         self.image_tagging_client = ImageTaggingAPI(**image_tagging_config)
-        self.rabbitmq_client = RabbitMQConnector(**rabbitmq_config)
+        self.rabbitmq_client = RabbitMQReceiver(**rabbitmq_config)
         self.rabbitmq_client.receive_message()
         pass
 

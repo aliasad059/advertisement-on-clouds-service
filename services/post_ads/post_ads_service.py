@@ -1,12 +1,12 @@
 from utils.DBaaS.psql_client import PSQLConnector
 from utils.DBaaS.s3_client import S3Connector
-from utils.RabbitMQaaS.rabbitmq_client import RabbitMQConnector
+from utils.RabbitMQaaS.rabbitmq_sender import RabbitMQSender
 
 class PostAdsService:
     def __init__(self, psql_config, s3_config, rabbitmq_config) -> None:
         self.psql_client = PSQLConnector(**psql_config)
         self.s3_client = S3Connector(**s3_config)
-        self.rabbitmq_client = RabbitMQConnector(**rabbitmq_config)
+        self.rabbitmq_client = RabbitMQSender(**rabbitmq_config)
         pass
     
     def post_ads(self, image, description, email):
