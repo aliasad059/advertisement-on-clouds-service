@@ -20,12 +20,3 @@ s3_config = {
     "secret_key": os.getenv("S3_SECRET_KEY"),
     "bucket_name": os.getenv("S3_BUCKET_NAME"),
 }
-
-rabbitmq_config = {
-    "AMQP_URL": os.getenv("RABBITMQ_AMQP_URL"),
-}
-
-image_tagging_config = {
-    "api_key": os.getenv("IMAGGA_API_KEY"),
-    "api_secret": os.getenv("IMAGGA_API_SECRET"),
-}
