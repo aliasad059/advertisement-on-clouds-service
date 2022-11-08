@@ -22,6 +22,9 @@ WORKDIR ${DockerHome}
 # install the dependencies
 RUN pip install --upgrade pip
 
+RUN --mount=type=cache,target=/root/.cache \
+	pip install -r requirements.txt
+
 # copy the working directory
 COPY . ${DockerHome}
 
