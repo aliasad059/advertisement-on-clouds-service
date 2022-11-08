@@ -1,9 +1,9 @@
 import requests
 
 class EmailDeliveryAPI():
-    def __init__(self, domain, api_key) -> None:
-        self.domain = domain
-        self.api_key = api_key
+    def __init__(self, config):
+        self.domain = config['domain']
+        self.api_key = config['api_key']
     
     def send_email(self, email, subject, text):
         return requests.post(
