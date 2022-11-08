@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-UVICON_HOST = os.getenv('UVICORN_HOST')
-UVICON_PORT = os.getenv('UVICORN_PORT')
+UVICORN_HOST = os.getenv('UVICORN_HOST')
+UVICORN_PORT = os.getenv('UVICORN_PORT')
 
 
 psql_config = {
