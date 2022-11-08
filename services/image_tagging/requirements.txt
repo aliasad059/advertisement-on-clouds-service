@@ -1,0 +1,6 @@
+python-dotenv
+fastapi
+prometheus_fastapi_instrumentator
+uvicorn[standard]
+requests
+python-multipart
