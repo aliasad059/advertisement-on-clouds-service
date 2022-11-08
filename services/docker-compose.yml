@@ -1,0 +1,67 @@
+services:
+
+  email_delivery:
+    build:
+      context: ./email_delivery
+      dockerfile: deploy/Dockerfile
+    container_name: email_delivery_service
+    image: email_delivery_service
+    restart: always
+    ports:
+      - 40000:40000
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - UVICORN_PORT=40000
+
+  image_tagging:
+    build:
+      context: ./image_tagging
+      dockerfile: deploy/Dockerfile
+    container_name: image_tagging_service
+    image: image_tagging_service
+    restart: always
+    ports:
+      - 40001:40001
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - UVICORN_PORT=40001
+
+  post_ads:
+    build:
+      context: ./post_ads
+      dockerfile: deploy/Dockerfile
+    container_name: post_ads_service
+    image: post_ads_service
+    restart: always
+    ports:
+      - 40002:40002
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - UVICORN_PORT=40002
+
+  process_ads:
+    build:
+      context: ./process_ads
+      dockerfile: deploy/Dockerfile
+    container_name: process_ads_service
+    image: process_ads_service
+    restart: always
+    ports:
+      - 40003:40003
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - UVICORN_PORT=40003
+      
+  rabbitmq_reciever:
+    build:
+      context: ./rabbitmq_reciever
+      dockerfile: deploy/Dockerfile
+    container_name: rabbitmq_reciever_service
+    image: rabbitmq_reciever_service
+    restart: always
+    ports:
+      - 40004:40004
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - UVICORN_PORT=40004
+    
