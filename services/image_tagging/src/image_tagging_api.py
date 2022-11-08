@@ -1,9 +1,9 @@
 import requests
 
 class ImageTaggingAPI():
-    def __init__(self, api_key, api_secret) -> None:
-        self.api_key = api_key
-        self.api_secret = api_secret
+    def __init__(self, config):
+        self.api_key = config['api_key']
+        self.api_secret = config['api_secret']
 
     def get_image_tags(self, image_url):
         response = requests.get(
