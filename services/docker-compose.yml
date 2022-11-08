@@ -52,12 +52,12 @@ services:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40003
       
-  rabbitmq_reciever:
+  rabbitmq_receiver:
     build:
-      context: ./rabbitmq_reciever
+      context: ./rabbitmq_receiver
       dockerfile: deploy/Dockerfile
-    container_name: rabbitmq_reciever_service
-    image: rabbitmq_reciever_service
+    container_name: rabbitmq_receiver_service
+    image: rabbitmq_receiver_service
     restart: always
     ports:
       - 40004:40004
