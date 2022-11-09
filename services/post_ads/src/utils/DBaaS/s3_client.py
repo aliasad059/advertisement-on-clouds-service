@@ -4,14 +4,14 @@ from botocore.exceptions import ClientError
 
 class S3Connector():
     def __init__(self, endpoint_url, access_key, secret_key, bucket_name):
-        self.s3 = boto3.client(
+        self.s3 = boto3.resource(
                 's3',
                 endpoint_url=endpoint_url,
                 aws_access_key_id=access_key,
                 aws_secret_access_key=secret_key
-            ) 
+            )
         self.bucket_name = bucket_name
-        self.bucket = self.s3.Bucket(bucket_name).create()
+        self.bucket = self.s3.Bucket(bucket_name)
         print("Connected to the S3 server successfully")
         
     def upload_file(self, image_file, object_name):

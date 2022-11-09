@@ -16,6 +16,7 @@ psql_config = {
 }
 
 s3_config = {
+    "endpoint_url": os.getenv("S3_ENDPOINT_URL"),
     "access_key": os.getenv("S3_ACCESS_KEY"),
     "secret_key": os.getenv("S3_SECRET_KEY"),
     "bucket_name": os.getenv("S3_BUCKET_NAME"),
