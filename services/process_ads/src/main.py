@@ -23,7 +23,7 @@ async def process_ads(
 
 def run():
     LOGGING_CONFIG["formatters"]["default"]["fmt"] = "%(asctime)s [%(name)s] %(levelprefix)s %(message)s"
-    uvicorn.run(app, host=UVICORN_HOST, port=UVICORN_PORT)
+    uvicorn.run(app, host=UVICORN_HOST, port=int(UVICORN_PORT))
 
 
 if __name__ == '__main__':
