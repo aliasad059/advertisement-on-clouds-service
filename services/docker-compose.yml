@@ -7,8 +7,7 @@ services:
     container_name: email_delivery_service
     image: email_delivery_service
     restart: always
-    ports:
-      - 40000:40000
+    network_mode: host
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40000
@@ -20,8 +19,7 @@ services:
     container_name: image_tagging_service
     image: image_tagging_service
     restart: always
-    ports:
-      - 40001:40001
+    network_mode: host
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40001
@@ -33,8 +31,7 @@ services:
     container_name: post_ads_service
     image: post_ads_service
     restart: always
-    ports:
-      - 40002:40002
+    network_mode: host
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40002
@@ -46,8 +43,7 @@ services:
     container_name: process_ads_service
     image: process_ads_service
     restart: always
-    ports:
-      - 40003:40003
+    network_mode: host
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40003
@@ -59,8 +55,7 @@ services:
     container_name: rabbitmq_receiver_service
     image: rabbitmq_receiver_service
     restart: always
-    ports:
-      - 40004:40004
+    network_mode: host
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=40004
