@@ -11,8 +11,8 @@ class PostAdsService:
     
     def post_ads(self, image, description, email):
         # save description and email to db
-        request_id =  self.psql_client.insert_into_table("ads", description, email)
-
+        request_id =  self.psql_client.insert_into_table("ads", "description, email, status", f"'{description}', '{email}', 'pending'")[0][0]
+        request_id = str(request_id)
         # save image to s3 bucket
         s3_respose = self.s3_client.upload_file(image.file, request_id)
         print(s3_respose)
@@ -27,17 +27,17 @@ class PostAdsService:
         request_status = self.psql_client.select_from_table("ads", "*", f"id = {post_id}")
         if request_status:
             if request_status[0][3] == "approved":
-                # TODO: send image link to user
                 return {
                     "request_id":request_status[0][0],
                     "status": request_status[0][3],
                     "category":request_status[0][4],
                     "description":request_status[0][1],
+                    "image_link": request_status[0][5]
                  }
             else:
                 return {
                     "request_id":request_status[0][0],
                     "status": request_status[0][3],
-                    "description":request_status[0][1],
+                    "description":request_status[0][1]
                  }
         return 'not found'
