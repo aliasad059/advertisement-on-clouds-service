@@ -21,3 +21,5 @@ s3_config = {
     "secret_key": os.getenv("S3_SECRET_KEY"),
     "bucket_name": os.getenv("S3_BUCKET_NAME"),
 }
+
+IMAGE_TAGGING_SERVICE_URL = os.getenv("IMAGE_TAGGING_SERVICE_URL")
