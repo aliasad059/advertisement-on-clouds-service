@@ -1,4 +1,6 @@
 import pika, sys, os
+import requests
+from config import PROCESS_ADS_SERVICE_URL
 
 class RabbitMQReceiver():
     def __init__(self, AMQP_URL) -> None:
@@ -10,7 +12,8 @@ class RabbitMQReceiver():
     def receive_message(self):
         def callback(ch, method, properties, body):
             print(" [x] Received %r" % body.decode())
-            #TODO: send request to process ads service
+            requests.post(PROCESS_ADS_SERVICE_URL, data={"image_id": body.decode()})
+            
         try:
             self.channel.basic_consume(queue='ads', on_message_callback=callback, auto_ack=True)
             print(' [*] Waiting for messages. To exit press CTRL+C')
