@@ -17,7 +17,7 @@ class PSQLConnector():
         """
             creates the ads table if it doesn't exist
         """
-        self.create_table("ads", "id SERIAL PRIMARY KEY, description VARCHAR(255), email VARCHAR(255), state VARCHAR(255), category VARCHAR(255)")
+        self.create_table("ads", "id SERIAL PRIMARY KEY, description VARCHAR(255), email VARCHAR(255), status VARCHAR(255), category VARCHAR(255), s3_url TEXT")
 
 
     def create_table(self, table_name, columns):
@@ -61,7 +61,7 @@ class PSQLConnector():
         """
             updates the table
         """
-        query = f"UPDATE {table_name} SET {column} = {value} WHERE {condition}"
+        query = f"UPDATE {table_name} SET {column} = '{value}' WHERE {condition}"
         self.execute_query(query)
     
 
