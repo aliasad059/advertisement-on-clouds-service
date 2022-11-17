@@ -23,3 +23,11 @@ s3_config = {
 }
 
 IMAGE_TAGGING_SERVICE_URL = os.getenv("IMAGE_TAGGING_SERVICE_URL")
+
+EMAIL_DELIVERY_SERVICE_URL=os.getenv("EMAIL_DELIVERY_SERVICE_URL")
+EMAIL_PROCESSED_SUBJECT='Request processed'
+EMAIL_PROCESSED_TEXT="Your request with request id REQUEST_ID has been processed.\n" + \
+                    "Here is the result:\n\n"+ \
+                    "RESULT\n\n\n"+ \
+                    "Best regards,\n" + \
+                    "Your friends at the Ads On Cloud Service"
