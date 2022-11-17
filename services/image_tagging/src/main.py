@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, UploadFile, File
 from prometheus_fastapi_instrumentator import Instrumentator
 from uvicorn.config import LOGGING_CONFIG
 
@@ -15,7 +15,7 @@ image_tagging_api = ImageTaggingAPI(image_tagging_config)
 async def tag_image_url(
     image_url: str = Form(...)
 ):
-    response = image_tagging_api.get_image_tags_with_confidence(image_url)
+    response = image_tagging_api.get_image_tags_with_confidence(image_url=image_url, mode='file')
     return response
 
 def run():
