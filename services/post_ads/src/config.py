@@ -25,3 +25,11 @@ s3_config = {
 rabbitmq_config = {
     "AMQP_URL": os.getenv("RABBITMQ_AMQP_URL"),
 }
+
+EMAIL_DELIVERY_SERVICE_URL=os.getenv("EMAIL_DELIVERY_SERVICE_URL")
+EMAIL_SUCCESS_SUBJECT='Request received'
+EMAIL_SUCCESS_TEXT="Your request has been received and is being processed.\n" + \
+                    "You will be notified when it is approved.\n\n"+ \
+                    "Your request id is: \n\t REQUEST_ID\n\n\n"+ \
+                    "Best regards,\n" + \
+                    "Your friends at the Ads On Cloud Service"
