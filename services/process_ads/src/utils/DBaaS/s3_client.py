@@ -21,9 +21,20 @@ class S3Connector():
         
         print("Connected to the S3 server successfully")
         
-    def upload_file(self, image_file, object_name):
+    def upload_file(self, image_file: bytes, object_name: str) -> dict:
         """
-            Uploads a file to the bucket
+        Uploads the given image file to an S3 bucket under the specified object name.
+
+        Args:
+            image_file (bytes): The file to upload, in bytes.
+            object_name (str): The name of the object to create in the bucket.
+
+        Returns:
+            dict: S3 response object if the upload succeeded.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to upload to S3.
         """
         try:
             bucket = self.bucket
@@ -37,9 +48,19 @@ class S3Connector():
             return None
         return response
         
-    def get_file_url(self, object_name):
+    def get_file_url(self, object_name: str) -> str:
         """
-            Returns the url of the file
+        Generates a presigned URL for the given S3 object.
+
+        Args:
+            object_name (str): The name of the object for which to create the presigned URL.
+
+        Returns:
+            str: A presigned URL allowing access to the object if successful.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to generate the presigned URL.
         """
         try:
             response = self.s3_client.generate_presigned_url(
@@ -55,9 +76,19 @@ class S3Connector():
             return None
         return response
     
-    def delete_file(self, object_name):
+    def delete_file(self, object_name: str) -> dict:
         """
-            Deletes a file from the bucket
+        Deletes the specified file from the S3 bucket.
+
+        Args:
+            object_name (str): The name of the object to delete.
+
+        Returns:
+            dict: S3 delete operation response object if the delete succeeded.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to delete from S3.
         """
         try:
             object = self.bucket.Object(object_name)
