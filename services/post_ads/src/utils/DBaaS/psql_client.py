@@ -50,11 +50,11 @@ class PSQLConnector():
     
 
     def delete_from_table(self, table_name, condition):
-        """
-            deletes rows from the table
-        """
-        query = f"DELETE FROM {table_name} WHERE {condition}"
-        self.execute_query(query)
+        try:
+            query = f"DELETE FROM {table_name} WHERE {condition}"
+            self.execute_query(query)
+        except psycopg2.Error as e:
+            return {"error": str(e)}
     
 
     def update_table(self, table_name, column, value, condition):

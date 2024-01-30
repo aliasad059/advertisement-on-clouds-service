@@ -61,10 +61,7 @@ class S3Connector():
         """
         try:
             object = self.bucket.Object(object_name)
-            response = object.delete(
-                VersionId='string',
-            )
+            response = object.delete()
+            return {"message": "File deleted successfully"}
         except ClientError as e:
-            print(e)
-            return None
-        return response
+            return {"error": str(e)}

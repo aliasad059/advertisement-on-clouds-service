@@ -30,6 +30,19 @@ async def post_new_ad(
     return response
 
 
+@app.delete("/delete_post")
+async def delete_post(post_id: str):
+    result = post_ads_service.delete_post(post_id)
+    return result
+
+
+    def delete_post(self, post_id):
+        # delete the post from the database and the associated image from s3
+        self.psql_client.delete_from_table('ads', f"id = {post_id}")
+        self.s3_client.delete_file(post_id)
+        return {"message": "Post deleted successfully"}
+
+
 @app.post("/get_request_status")
 async def get_request_status(
     request_id : str = Form(...)
