@@ -48,9 +48,19 @@ class S3Connector():
             return None
         return response
         
-    def get_file_url(self, object_name):
+    def get_file_url(self, object_name: str) -> str:
         """
-            Returns the url of the file
+        Generates a presigned URL for the given S3 object.
+
+        Args:
+            object_name (str): The name of the object for which to create the presigned URL.
+
+        Returns:
+            str: A presigned URL allowing access to the object if successful.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to generate the presigned URL.
         """
         try:
             response = self.s3_client.generate_presigned_url(
