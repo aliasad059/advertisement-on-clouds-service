@@ -76,9 +76,19 @@ class S3Connector():
             return None
         return response
     
-    def delete_file(self, object_name):
+    def delete_file(self, object_name: str) -> dict:
         """
-            Deletes a file from the bucket
+        Deletes the specified file from the S3 bucket.
+
+        Args:
+            object_name (str): The name of the object to delete.
+
+        Returns:
+            dict: S3 delete operation response object if the delete succeeded.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to delete from S3.
         """
         try:
             object = self.bucket.Object(object_name)
