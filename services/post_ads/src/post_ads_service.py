@@ -21,6 +21,15 @@ class PostAdsService:
         self.rabbitmq_client.send_message(request_id)
 
         return {"request_id": request_id}
+    
+
+    def delete_post(self, post_id):
+        try:
+            self.psql_client.delete_from_table('ads', f"id = {post_ip}")
+            return {"message": "Post deleted successfully"}
+        except Exception as e:
+            return {"error": str(e)}
+        
 
     def get_request_status(self, post_id):
         # get request status from db

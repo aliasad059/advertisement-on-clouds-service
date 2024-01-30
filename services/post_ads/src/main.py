@@ -29,6 +29,10 @@ async def post_new_ad(
     )
     return response
 
+@app.delete("/delete_post")
+async def delete_post(post_id: str):
+    result = post_ads_service.delete_post(post_id)
+    return result
 
 @app.post("/get_request_status")
 async def get_request_status(
