@@ -21,9 +21,20 @@ class S3Connector():
         
         print("Connected to the S3 server successfully")
         
-    def upload_file(self, image_file, object_name):
+    def upload_file(self, image_file: bytes, object_name: str) -> dict:
         """
-            Uploads a file to the bucket
+        Uploads the given image file to an S3 bucket under the specified object name.
+
+        Args:
+            image_file (bytes): The file to upload, in bytes.
+            object_name (str): The name of the object to create in the bucket.
+
+        Returns:
+            dict: S3 response object if the upload succeeded.
+            None: If an exception occurred, None is returned.
+
+        Raises:
+            ClientError: If an error occurs when attempting to upload to S3.
         """
         try:
             bucket = self.bucket
