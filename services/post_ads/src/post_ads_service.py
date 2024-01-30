@@ -8,6 +8,14 @@ class PostAdsService:
         self.s3_client = S3Connector(**s3_config)
         self.rabbitmq_client = RabbitMQSender(**rabbitmq_config)
         pass
+
+    def delete_post(self, post_id):
+        try:
+            self.psql_client.delete_from_table('ads', f"id = {post_id}")
+            self.s3_client.delete_file(post_id)
+            return {"message": "Post deleted successfully"}
+        except Exception as e:
+            return {"error": str(e)}
     
     def post_ads(self, image, description, email):
         # save description and email to db
